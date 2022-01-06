@@ -25,7 +25,6 @@ public class User extends Model {
         try {
             this.date = Date.valueOf(date);
         } catch (Exception e) {
-            System.out.println(e);
             this.date = Date.valueOf("2000-01-01");
         }
         this.admin = admin;
@@ -78,7 +77,16 @@ public class User extends Model {
 
     @Override
     public void delete() {
-        System.out.println("TODO");
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("DELETE FROM users WHERE username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -107,7 +115,7 @@ public class User extends Model {
         try {
             Connection conn = connect();
 
-            PreparedStatement statement = conn.prepareStatement("update users set first_name=?, last_name=?, username=?, pass_hash=?, profil_picture=?, birth_date=?, admin=? where username = ? and pass_hash = ?");
+            PreparedStatement statement = conn.prepareStatement("update users set first_name=?, last_name=?, username=?, pass_hash=?, profil_picture=?, birth_date=?, admin=? where username = ?");
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, username);
@@ -116,13 +124,44 @@ public class User extends Model {
             statement.setDate(6, date);
             statement.setBoolean(7, admin);
             statement.setString(8, username);
-            statement.setString(9, passHash);
 
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getOtherData() {
+        try {
+        Connection conn = connect();
+
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+        statement.setString(1, username);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            System.out.println("result");
+            firstName = result.getString("first_name");
+            lastName = result.getString("last_name");
+            date = result.getDate("birth_date");
+            passHash = result.getString("pass_hash");
+            admin = result.getBoolean("admin");
+            profilPicture = result.getString("profil_picture");
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUsername(String username) {
+        System.out.println("0 " + passHash);
+        getOtherData();
+        System.out.println("1 " + passHash);
+        delete();
+        System.out.println("2 " + passHash);
+        this.username = username;
+        save();
+        System.out.println("3 " + passHash);
     }
 
     private Connection connect() throws SQLException {
@@ -135,5 +174,69 @@ public class User extends Model {
         } catch (ClassNotFoundException ignored) {
         }
         return DriverManager.getConnection(DB_URL, USER, PASS);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassHash() {
+        return passHash;
+    }
+
+    public String getProfilPicture() {
+        return profilPicture;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
+    }
+
+    public void setProfilPicture(String profilPicture) {
+        this.profilPicture = profilPicture;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setDate(String date) {
+        try {
+            this.date = Date.valueOf(date);
+        } catch (Exception e) {
+            this.date = Date.valueOf("2000-01-01");
+        }
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 }

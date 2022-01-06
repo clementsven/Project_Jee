@@ -7,7 +7,7 @@
 --%>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="/">Home</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="sign-in">Sign in</a>
