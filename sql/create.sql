@@ -48,5 +48,6 @@ create table notif (
     id int auto_increment not null,
     date date,
     msg varchar(255),
+    username varchar(255),
     constraint pk_notif_id primary key (id)
 );

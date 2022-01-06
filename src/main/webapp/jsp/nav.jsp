@@ -21,6 +21,9 @@
     <li class="nav-item">
         <a class="nav-link" href="profil">Profil</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="notif">Notification</a>
+    </li>
 <%  } else { %>
     <li class="nav-item">
         <a class="nav-link" href="login">Log in</a>
