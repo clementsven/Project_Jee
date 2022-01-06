@@ -1,5 +1,7 @@
 package project.jee.projectjeecovid.database;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
@@ -51,6 +53,38 @@ public class User extends Model{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean checkLogin() {
+        try {
+            String DB_URL = "jdbc:mysql://localhost/projetweb";
+            String USER = System.getenv("USERNAME");
+            String PASS = System.getenv("PASSWORD");
+            try {
+                // Why ?
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ignored) {
+            }
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet result = statement.executeQuery();
+            if(result.next()){
+                String tmp_hash = result.getString("pass_hash");
+                boolean tmp= BCrypt.checkpw(lastName,tmp_hash);
+                statement.close();
+                result.close();
+                return tmp;
+            }
+
+            statement.close();
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override
