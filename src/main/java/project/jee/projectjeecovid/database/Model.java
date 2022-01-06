@@ -4,4 +4,6 @@ public abstract class Model {
 
     public abstract void save();
     public abstract void delete();
+
+    public abstract boolean exist();
 }

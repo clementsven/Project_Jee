@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
 
-public class User extends Model{
+public class User extends Model {
 
     private String firstName;
     private String lastName;
@@ -22,7 +22,12 @@ public class User extends Model{
         this.username = username;
         this.passHash = passHash;
         this.profilPicture = profilPicture;
-        this.date = Date.valueOf("2000-01-01");
+        try {
+            this.date = Date.valueOf(date);
+        } catch (Exception e) {
+            System.out.println(e);
+            this.date = Date.valueOf("2000-01-01");
+        }
         this.admin = admin;
     }
 
@@ -90,5 +95,11 @@ public class User extends Model{
     @Override
     public void delete() {
         System.out.println("TODO");
+    }
+
+    @Override
+    public boolean exist() {
+        System.out.println("TODO");
+        return false;
     }
 }
