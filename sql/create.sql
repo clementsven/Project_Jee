@@ -41,6 +41,7 @@ create table activity_place (
 create table friends (
     user_1 varchar(255) not null,
     user_2 varchar(255) not null,
+    status int,
     constraint pk_friend_1 primary key (user_1, user_2)
 );
 

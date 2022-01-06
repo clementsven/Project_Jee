@@ -15,23 +15,23 @@
     <h1> Covid Web Project </h1><br>
     <%@ include file="nav.jsp" %>
 
-    <% System.out.println(request.getAttribute("error")); %>
+    <h2>${username} profile</h2>
     <form action="/profil"  method="post">
-        <label for="username" >Username:</label><br>
-        <input type="text" id="username" name="username" value="${username}" required><br>
+<%--        <label for="username" >Username:</label><br>--%>
+<%--        <input type="text" id="username" name="username" value="${username}" required><br>--%>
         <label for="first_name" >First name:</label><br>
         <input type="text" id="first_name" name="first_name" value="${first_name}"><br>
         <label for="last_name" >Last name:</label><br>
         <input type="text" id="last_name" name="last_name" value="${last_name}"><br>
         <label for="date" >Birth Date:</label><br>
         <input type="date" id="date" name="date" value="${date}"><br>
-        <input type="submit" value="Submit">
+        <input type="Save" value="Submit">
         <% if(request.getAttribute("error_date") != null && (Boolean)request.getAttribute("error_date")) { %>
         <p> Date is incorrect </p>
         <% } %>
-        <% if(request.getAttribute("error_user") != null && (Boolean)request.getAttribute("error_user")) { %>
-        <p> Username is already used </p>
-        <% } %>
+<%--        <% if(request.getAttribute("error_user") != null && (Boolean)request.getAttribute("error_user")) { %>--%>
+<%--        <p> Username is already used </p>--%>
+<%--        <% } %>--%>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
