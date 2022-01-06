@@ -7,16 +7,13 @@
 --%>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Home</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="sign-in">Sign in</a>
     </li>
 <%
-    String username = (String) request.getSession().getAttribute("username");
-    String passhash = (String) request.getSession().getAttribute("passhash");
-    User u = new User(null, null, username, passhash, null, null, false);
-    if (u.exist()) {
+    if (session.getAttribute("username") != null) {
 %>
     <li class="nav-item">
         <a class="nav-link" href="log-out">Log out</a>
@@ -26,7 +23,7 @@
     </li>
 <%  } else { %>
     <li class="nav-item">
-        <a class="nav-link disabled">Log out</a>
+        <a class="nav-link" href="login">Log in</a>
     </li>
     <li class="nav-item">
         <a class="nav-link disabled">Profil</a>

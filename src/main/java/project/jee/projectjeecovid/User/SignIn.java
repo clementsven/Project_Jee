@@ -59,7 +59,7 @@ public class SignIn extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(req, resp);
         }else {
             u.save();
-            this.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
         }
     }
 }

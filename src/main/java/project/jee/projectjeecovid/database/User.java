@@ -34,15 +34,7 @@ public class User extends Model {
     @Override
     public void save() {
         try {
-            String DB_URL = "jdbc:mysql://localhost/projetweb";
-            String USER = System.getenv("USERNAME");
-            String PASS = System.getenv("PASSWORD");
-            try {
-                // Why ?
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ignored) {
-            }
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = connect();
 
             PreparedStatement statement = conn.prepareStatement("insert into users(first_name, last_name, username, pass_hash, profil_picture, birth_date, admin) values (?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, firstName);
@@ -62,15 +54,7 @@ public class User extends Model {
 
     public boolean checkLogin() {
         try {
-            String DB_URL = "jdbc:mysql://localhost/projetweb";
-            String USER = System.getenv("USERNAME");
-            String PASS = System.getenv("PASSWORD");
-            try {
-                // Why ?
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ignored) {
-            }
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = connect();
 
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
             statement.setString(1, username);
@@ -99,7 +83,57 @@ public class User extends Model {
 
     @Override
     public boolean exist() {
-        System.out.println("TODO");
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet result = statement.executeQuery();
+            boolean exist = result.next();
+            statement.close();
+            result.close();
+            return exist;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
+    }
+
+    @Override
+    public void update() {
+        if (!exist())
+            return;
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("update users set first_name=?, last_name=?, username=?, pass_hash=?, profil_picture=?, birth_date=?, admin=? where username = ? and pass_hash = ?");
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, username);
+            statement.setString(4, passHash);
+            statement.setString(5, profilPicture);
+            statement.setDate(6, date);
+            statement.setBoolean(7, admin);
+            statement.setString(8, username);
+            statement.setString(9, passHash);
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Connection connect() throws SQLException {
+        String DB_URL = "jdbc:mysql://localhost/projetweb";
+        String USER = System.getenv("USERNAME");
+        String PASS = System.getenv("PASSWORD");
+        try {
+            // Why ?
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ignored) {
+        }
+        return DriverManager.getConnection(DB_URL, USER, PASS);
     }
 }
