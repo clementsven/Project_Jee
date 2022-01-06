@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -19,7 +18,6 @@ public class SignIn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-
         this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(req, resp);
     }
 
@@ -61,13 +59,7 @@ public class SignIn extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(req, resp);
         }else {
             u.save();
-            resp.setContentType("text/html");
-            PrintWriter out = resp.getWriter();
-            out.println("<html>");
-            out.println("<body>");
-            out.println("  <h1> Sign in Post </h1>");
-            out.println("</body>");
-            out.println("</html>");
+            this.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         }
     }
 }
