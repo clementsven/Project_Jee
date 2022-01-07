@@ -1,6 +1,5 @@
 package project.jee.projectjeecovid.User;
 
-import org.mindrot.jbcrypt.BCrypt;
 import project.jee.projectjeecovid.database.User;
 
 import javax.servlet.ServletException;
@@ -50,7 +49,7 @@ public class Profil extends HttpServlet {
         User tmpUser = new User(null , null, username, null, null, null, false);
         boolean userExist = tmpUser.exist() && (userSession.compareTo(username) != 0);
 
-        boolean wrongDate = false;
+        boolean wrongDate;
         try {
             Date d = Date.valueOf(dateStr);
             LocalDate ldt = LocalDate.now();
