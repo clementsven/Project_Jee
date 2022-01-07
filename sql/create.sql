@@ -41,6 +41,7 @@ create table activity_place (
 create table friends (
     user_1 varchar(255) not null,
     user_2 varchar(255) not null,
+    status int,
     constraint pk_friend_1 primary key (user_1, user_2)
 );
 
@@ -48,5 +49,6 @@ create table notif (
     id int auto_increment not null,
     date date,
     msg varchar(255),
+    username varchar(255),
     constraint pk_notif_id primary key (id)
 );
