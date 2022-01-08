@@ -1,5 +1,6 @@
 <%@ page import="project.jee.projectjeecovid.database.Activity" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="project.jee.projectjeecovid.database.ActivityPlace" %><%--
   Created by IntelliJ IDEA.
   User: Safyrus
   Date: 08/01/2022
@@ -26,6 +27,7 @@
         String user = (String) session.getAttribute("username");
         ArrayList<Activity> activities = Activity.getAllUserActivities(user);
         for (Activity a: activities) {
+            String placeName = ActivityPlace.getPlaceName(a.getId());
     %>
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
@@ -33,7 +35,7 @@
             <small><%=a.getDateBegin().toString()%> - <%=a.getDateEnd().toString()%></small>
         </div>
         <p class="mb-1"><%=a.getName()%></p>
-        <small><%=a.getCreator()%></small>
+        <small>Made by <%=a.getCreator()%>. Located in <%=placeName%></small>
     </a>
     <%
         }

@@ -1,6 +1,7 @@
 package project.jee.projectjeecovid.activity;
 
 import project.jee.projectjeecovid.database.Activity;
+import project.jee.projectjeecovid.database.ActivityPlace;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,8 @@ public class CreateActivity extends HttpServlet {
         String dateBeginStr = req.getParameter("date_start");
         String dateEndStr = req.getParameter("date_end");
         String name = req.getParameter("name");
+        String placeId = req.getParameter("place");
+        int idPlace = 0;
 
         boolean wrongDateBegin;
         try {
@@ -44,20 +47,28 @@ public class CreateActivity extends HttpServlet {
         try {
             Date db = Date.valueOf(dateBeginStr);
             Date de = Date.valueOf(dateEndStr);
-            LocalDate ldt = LocalDate.now();
-            Date now = Date.valueOf(ldt);
             wrongDateEnd = de.before(db);
         } catch (Exception e) {
             System.out.println(e);
             wrongDateEnd = true;
         }
 
-        if (wrongDateBegin || wrongDateEnd) {
+        boolean wrongPlace;
+        try {
+            idPlace = Integer.parseInt(placeId);
+            wrongPlace = idPlace == 0;
+        } catch (Exception e) {
+            System.out.println(e);
+            wrongPlace = true;
+        }
+
+        if (wrongDateBegin || wrongDateEnd || wrongPlace) {
             req.setAttribute("date_start", dateBeginStr);
             req.setAttribute("date_end", dateEndStr);
             req.setAttribute("name", name);
             req.setAttribute("error_date_begin", wrongDateBegin);
             req.setAttribute("error_date_end", wrongDateEnd);
+            req.setAttribute("error_place", wrongPlace);
             this.getServletContext().getRequestDispatcher("/jsp/new-activity.jsp").forward(req, resp);
         }else {
             Date dateBegin = Date.valueOf(dateBeginStr);
@@ -65,6 +76,9 @@ public class CreateActivity extends HttpServlet {
             String creator = (String) req.getSession().getAttribute("username");
             Activity activity = new Activity(0, creator, dateBegin, dateEnd, name);
             activity.save();
+            activity.updateID();
+            ActivityPlace ap = new ActivityPlace(activity.getId(), idPlace);
+            ap.save();
             this.getServletContext().getRequestDispatcher("/jsp/activity.jsp").forward(req, resp);
         }
     }

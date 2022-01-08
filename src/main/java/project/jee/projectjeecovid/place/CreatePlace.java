@@ -26,7 +26,7 @@ public class CreatePlace extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String address = req.getParameter("address");
+        String address = req.getParameter("adr");
         String name = req.getParameter("name");
 
 /*        boolean errName = false;

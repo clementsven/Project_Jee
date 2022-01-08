@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="project.jee.projectjeecovid.database.Place" %><%--
   Created by IntelliJ IDEA.
   User: Safyrus
   Date: 08/01/2022
@@ -23,12 +24,27 @@
     <input type="date" id="date_end" name="date_end" value="${date_end}"><br>
     <label for="name" >Name:</label><br>
     <input type="text" id="name" name="name" value="${name}"><br>
+    <label for="place" >Name:</label><br>
+    <select class="form-select" id="place" name="place">
+        <option selected>Select a place</option>
+        <%
+            ArrayList<Place> places = Place.getAllPlaces();
+            for (Place p: places) {
+        %>
+        <option value="<%=p.getId()%>"><%=p.getName()%></option>
+        <%
+            }
+        %>
+    </select>
     <input type="submit" value="Submit">
     <% if(request.getAttribute("error_date_begin") != null && (Boolean)request.getAttribute("error_date_begin")) { %>
     <p> The starting date cannot be before the current date </p>
     <% } %>
     <% if(request.getAttribute("error_date_end") != null && (Boolean)request.getAttribute("error_date_end")) { %>
     <p> The end date cannot be before the starting date </p>
+    <% } %>
+    <% if(request.getAttribute("error_place") != null && (Boolean)request.getAttribute("error_place")) { %>
+    <p> The place is invalid </p>
     <% } %>
 </form>
 

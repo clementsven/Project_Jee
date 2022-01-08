@@ -78,6 +78,28 @@ public class Activity implements Model{
 
     }
 
+    public void updateID() {
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT id FROM activity WHERE creator = ? and date_begin = ? and date_end = ? and name = ?");
+            statement.setString(1, creator);
+            statement.setDate(2, dateBegin);
+            statement.setDate(3, dateEnd);
+            statement.setString(4, name);
+            statement.executeQuery();
+
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                this.id = resultSet.getInt("id");
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static Connection connect() throws SQLException {
         String DB_URL = "jdbc:mysql://localhost/projetweb";
         String USER = System.getenv("USERNAME");
