@@ -21,6 +21,7 @@ create table activity (
     creator varchar(255),
     date_begin date,
     date_end date,
+    name varchar (255),
     constraint pk_acti_id primary key (id)
 );
 

@@ -3,7 +3,7 @@ package project.jee.projectjeecovid.database;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Notif extends Model {
+public class Notif implements Model {
 
     private int id;
     private Date date;

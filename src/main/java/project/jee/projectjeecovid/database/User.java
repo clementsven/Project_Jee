@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
 
-public class User extends Model {
+public class User implements Model {
 
     private String firstName;
     private String lastName;

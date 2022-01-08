@@ -1,12 +1,12 @@
 package project.jee.projectjeecovid.database;
 
-public abstract class Model {
+public interface Model {
 
-    public abstract void save();
+    void save();
 
-    public abstract void delete();
+    void delete();
 
-    public abstract boolean exist();
+    boolean exist();
 
-    public abstract void update();
+    void update();
 }
