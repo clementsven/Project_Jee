@@ -184,16 +184,6 @@ public class User implements Model {
         }
     }
 
-    public void updateUsername(String username) {
-        System.out.println("0 " + passHash);
-        getOtherData();
-        System.out.println("1 " + passHash);
-        delete();
-        System.out.println("2 " + passHash);
-        this.username = username;
-        save();
-        System.out.println("3 " + passHash);
-    }
 
     private static Connection connect() throws SQLException {
         String DB_URL = "jdbc:mysql://localhost/projetweb";
@@ -206,7 +196,13 @@ public class User implements Model {
         }
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
+/*
+    void List<String> getAllFriend(){
+        ArrayList<String> rendu;
 
+    }
+
+*/
     public String getFirstName() {
         return firstName;
     }

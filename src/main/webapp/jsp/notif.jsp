@@ -21,7 +21,7 @@
             ArrayList<Notif> notifs = Notif.getAllUserNotif(user);
             for (Notif n: notifs) {
         %>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">Notification <%=n.getId()%></h5>
                 <small><%=n.getDate().toString()%></small>
