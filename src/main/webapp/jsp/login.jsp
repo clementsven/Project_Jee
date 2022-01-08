@@ -16,11 +16,13 @@
 
     <h2> Login </h2>
     <form action="login"  method="post">
-        <label for="username" >Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password" >Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" value="Submit">
+        <div class="form-group col-md-2">
+            <label for="username" >Username:</label><br>
+            <input type="text" class="form-control" id="username" name="username" required><br>
+            <label for="password" >Password:</label><br>
+            <input type="password" class="form-control" id="password" name="password" required><br>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
          <%
          if(request.getAttribute("check") != null && (boolean)request.getAttribute("check")){%>
                 <p>Error</p>

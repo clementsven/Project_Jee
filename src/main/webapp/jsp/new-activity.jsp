@@ -18,34 +18,36 @@
 <h2> New Activity </h2>
 
 <form action="new-activity" method="post">
-    <label for="date_start" >Starting Date:</label><br>
-    <input type="date" id="date_start" name="date_start" value="${date_start}"><br>
-    <label for="date_end" >Ending Date:</label><br>
-    <input type="date" id="date_end" name="date_end" value="${date_end}"><br>
-    <label for="name" >Name:</label><br>
-    <input type="text" id="name" name="name" value="${name}"><br>
-    <label for="place" >Name:</label><br>
-    <select class="form-select" id="place" name="place">
-        <option selected>Select a place</option>
-        <%
-            ArrayList<Place> places = Place.getAllPlaces();
-            for (Place p: places) {
-        %>
-        <option value="<%=p.getId()%>"><%=p.getName()%></option>
-        <%
-            }
-        %>
-    </select>
-    <input type="submit" value="Submit">
-    <% if(request.getAttribute("error_date_begin") != null && (Boolean)request.getAttribute("error_date_begin")) { %>
-    <p> The starting date cannot be before the current date </p>
-    <% } %>
-    <% if(request.getAttribute("error_date_end") != null && (Boolean)request.getAttribute("error_date_end")) { %>
-    <p> The end date cannot be before the starting date </p>
-    <% } %>
-    <% if(request.getAttribute("error_place") != null && (Boolean)request.getAttribute("error_place")) { %>
-    <p> The place is invalid </p>
-    <% } %>
+    <div class="form-group col-md-2">
+        <label for="date_start" >Starting Date:</label><br>
+        <input type="date" class="form-control" id="date_start" name="date_start" value="${date_start}"><br>
+        <label for="date_end" >Ending Date:</label><br>
+        <input type="date" class="form-control" id="date_end" name="date_end" value="${date_end}"><br>
+        <label for="name" >Name:</label><br>
+        <input type="text" class="form-control" id="name" name="name" value="${name}"><br>
+        <label for="place" >Name:</label><br>
+        <select class="form-select" class="form-control" id="place" name="place">
+            <option selected>Select a place</option>
+            <%
+                ArrayList<Place> places = Place.getAllPlaces();
+                for (Place p: places) {
+            %>
+            <option value="<%=p.getId()%>"><%=p.getName()%></option>
+            <%
+                }
+            %>
+        </select>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        <% if(request.getAttribute("error_date_begin") != null && (Boolean)request.getAttribute("error_date_begin")) { %>
+        <p> The starting date cannot be before the current date </p>
+        <% } %>
+        <% if(request.getAttribute("error_date_end") != null && (Boolean)request.getAttribute("error_date_end")) { %>
+        <p> The end date cannot be before the starting date </p>
+        <% } %>
+        <% if(request.getAttribute("error_place") != null && (Boolean)request.getAttribute("error_place")) { %>
+        <p> The place is invalid </p>
+        <% } %>
+    </div>
 </form>
 
 

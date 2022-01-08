@@ -17,17 +17,19 @@
 <h2> New Place </h2>
 
 <form action="new-place" method="post">
-    <label for="adr" >Address:</label><br>
-    <input type="text" id="adr" name="adr" value="${adr}"><br>
-    <label for="name" >Name:</label><br>
-    <input type="text" id="name" name="name" value="${name}"><br>
-    <input type="submit" value="Submit">
-    <% if(request.getAttribute("error_adr") != null && (Boolean)request.getAttribute("error_adr")) { %>
-    <p> error_adr </p>
-    <% } %>
-    <% if(request.getAttribute("error_name") != null && (Boolean)request.getAttribute("error_name")) { %>
-    <p> error_name </p>
-    <% } %>
+    <div class="form-group col-md-2">
+        <label for="adr" >Address:</label><br>
+        <input type="text" class="form-control" id="adr" name="adr" value="${adr}"><br>
+        <label for="name" >Name:</label><br>
+        <input type="text" class="form-control" id="name" name="name" value="${name}"><br>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        <% if(request.getAttribute("error_adr") != null && (Boolean)request.getAttribute("error_adr")) { %>
+        <p> error_adr </p>
+        <% } %>
+        <% if(request.getAttribute("error_name") != null && (Boolean)request.getAttribute("error_name")) { %>
+        <p> error_name </p>
+        <% } %>
+    </div>
 </form>
 
 

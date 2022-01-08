@@ -20,7 +20,7 @@
     <h3>Add a friend</h3>
     <div class="form-group">
         <label for="username" >Username:</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" class="form-control" id="username" name="username"><br>
         <button type="submit" class="btn btn-primary">Add friend</button>
     </div>
 </form>

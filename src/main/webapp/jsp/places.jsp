@@ -38,7 +38,7 @@
       if (u.getAdmin()) {
     %>
     <form action="del-place" method="get">
-      <input type="text" name="id" value="<%=p.getId()%>" hidden>
+      <input type="text" class="form-control" name="id" value="<%=p.getId()%>" hidden>
       <button type="submit" class="btn btn-secondary">Delete</button>
     </form>
     <% } %>
