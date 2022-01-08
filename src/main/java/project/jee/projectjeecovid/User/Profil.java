@@ -62,7 +62,7 @@ public class Profil extends HttpServlet {
 
         if (!wrongDate && !userExist) {
             u.update();
-            System.out.println(username + "  " + u.getUsername() + "  " + userSession);
+            // System.out.println(username + "  " + u.getUsername() + "  " + userSession);
             /*if (username.compareTo(u.getUsername()) != 0) {
                 u.updateUsername(username);
                 req.getSession().setAttribute("username",username);

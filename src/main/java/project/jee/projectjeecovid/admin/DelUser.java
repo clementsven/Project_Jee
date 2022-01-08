@@ -28,7 +28,6 @@ public class DelUser extends HttpServlet {
         }
 
         String name = req.getParameter("user");
-        System.out.println("name: " + name);
         u = new User(null, null, name, null, null, null, false);
         u.getOtherData();
         u.delete();

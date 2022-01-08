@@ -28,7 +28,7 @@
             <h5 class="mb-1">User <%=u.getUsername()%></h5>
         </div>
         <form action="edit-user" method="get">
-            <input type="text" name="user" value="<%=u.getUsername()%>" hidden>
+            <input type="text" name="username" value="<%=u.getUsername()%>" hidden>
             <button type="submit" class="btn btn-primary">Edit</button>
         </form>
         <form action="del-user" method="get">
