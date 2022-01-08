@@ -25,6 +25,8 @@
 
     <%
         String user = (String) session.getAttribute("username");
+        User u = new User(null, null, user, null, null, null, false);
+        u.getOtherData();
         ArrayList<Activity> activities = Activity.getAllUserActivities(user);
         for (Activity a: activities) {
             String placeName = ActivityPlace.getPlaceName(a.getId());
@@ -36,6 +38,14 @@
         </div>
         <p class="mb-1"><%=a.getName()%></p>
         <small>Made by <%=a.getCreator()%>. Located in <%=placeName%></small>
+        <%
+            if (u.getAdmin()) {
+        %>
+        <form action="del-activity" method="get">
+            <input type="text" name="id" value="<%=a.getId()%>" hidden>
+            <button type="submit" class="btn btn-secondary">Delete</button>
+        </form>
+        <% } %>
     </a>
     <%
         }

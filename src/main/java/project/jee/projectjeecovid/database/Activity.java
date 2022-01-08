@@ -65,7 +65,16 @@ public class Activity implements Model{
 
     @Override
     public void delete() {
+        try {
+            Connection conn = connect();
 
+            PreparedStatement statement = conn.prepareStatement("DELETE FROM activity WHERE id = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
