@@ -29,7 +29,7 @@
     %>
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Notification <%=a.getId()%></h5>
+            <h5 class="mb-1">Activity <%=a.getId()%></h5>
             <small><%=a.getDateBegin().toString()%> - <%=a.getDateEnd().toString()%></small>
         </div>
         <p class="mb-1"><%=a.getName()%></p>

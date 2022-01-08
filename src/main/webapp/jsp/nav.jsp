@@ -56,10 +56,13 @@
                         <a class="nav-link" href="profil">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="notif">Notification</a>
+                        <a class="nav-link" href="notif">Notifications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="activity">Activity</a>
+                        <a class="nav-link" href="activity">Activities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="places">Places</a>
                     </li>
                     <%  } else { %>
                     <li class="nav-item">
