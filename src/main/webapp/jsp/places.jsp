@@ -26,7 +26,7 @@
     ArrayList<Place> places = Place.getAllPlaces();
     for (Place p: places) {
   %>
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">Place <%=p.getId()%></h5>
     </div>
