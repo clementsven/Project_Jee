@@ -2,8 +2,6 @@ package project.jee.projectjeecovid.database;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 

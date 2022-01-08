@@ -23,6 +23,8 @@
 <div class="list-group">
   <%
     String user = (String) session.getAttribute("username");
+    User u = new User(null, null, user, null, null, null, false);
+    u.getOtherData();
     ArrayList<Place> places = Place.getAllPlaces();
     for (Place p: places) {
   %>
@@ -32,6 +34,14 @@
     </div>
     <p class="mb-1"><%=p.getName()%></p>
     <small><%=p.getAddress()%></small>
+    <%
+      if (u.getAdmin()) {
+    %>
+    <form action="del-place" method="get">
+      <input type="text" name="id" value="<%=p.getId()%>" hidden>
+      <button type="submit" class="btn btn-secondary">Delete</button>
+    </form>
+    <% } %>
   </a>
   <%
     }
