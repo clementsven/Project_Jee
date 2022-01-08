@@ -64,6 +64,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="places">Places</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="friends">Friends</a>
+                    </li>
                     <%  } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="login">Log in</a>
@@ -74,7 +77,7 @@
                     <%  } %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Navigation
+                            Others
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="#">See contact covid zone</a></li>

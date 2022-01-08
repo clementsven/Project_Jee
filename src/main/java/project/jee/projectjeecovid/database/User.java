@@ -5,6 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class User implements Model {
 
@@ -28,6 +29,10 @@ public class User implements Model {
             this.date = Date.valueOf("2000-01-01");
         }
         this.admin = admin;
+    }
+
+    public ArrayList<User> getAllFriends() {
+        return new ArrayList<>();
     }
 
     @Override
