@@ -31,6 +31,33 @@ public class User implements Model {
         this.admin = admin;
     }
 
+    public static ArrayList<User> getAllUser() {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM users");
+            ResultSet result = statement.executeQuery();
+            while (result.next()){
+                String firstname = result.getString("first_name");
+                String lastname = result.getString("last_name");
+                String username = result.getString("username");
+                String pass_hash = result.getString("pass_hash");
+                String profilpicture = result.getString("profil_picture");
+                String birthdate = result.getString("birth_date");
+                boolean admin = result.getBoolean("admin");
+                User u = new User(firstname, lastname, username, pass_hash, profilpicture, birthdate, admin);
+                users.add(u);
+            }
+
+            statement.close();
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public ArrayList<User> getAllFriends() {
         return new ArrayList<>();
     }
@@ -145,7 +172,6 @@ public class User implements Model {
         statement.setString(1, username);
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-            System.out.println("result");
             firstName = result.getString("first_name");
             lastName = result.getString("last_name");
             date = result.getDate("birth_date");
@@ -169,7 +195,7 @@ public class User implements Model {
         System.out.println("3 " + passHash);
     }
 
-    private Connection connect() throws SQLException {
+    private static Connection connect() throws SQLException {
         String DB_URL = "jdbc:mysql://localhost/projetweb";
         String USER = System.getenv("USERNAME");
         String PASS = System.getenv("PASSWORD");
