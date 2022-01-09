@@ -23,7 +23,7 @@
             <input type="text" id="username" name="username" required><br>
             <label for="password" >Password:</label><br>
             <input type="password" id="password" name="password" required><br>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-warning" value="Submit">
          <%
          if(request.getAttribute("check") != null && (boolean)request.getAttribute("check")){%>
                 <p>Error</p>

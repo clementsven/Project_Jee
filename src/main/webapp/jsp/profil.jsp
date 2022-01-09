@@ -19,16 +19,16 @@
     <div style="text-align: center;">
     <h2>${username} profile</h2>
     <form action="profil"  method="post">
-        <div class="form-group col-md-2">
+        <div class="form-group">
     <%--        <label for="username" >Username:</label><br>--%>
     <%--        <input type="text" id="username" name="username" value="${username}" required><br>--%>
-            <label for="first_name" >First name:</label><br>
-            <input type="text" class="form-control" id="first_name" name="first_name" value="${first_name}"><br>
+            <label for="first_name">First name:</label><br>
+            <input type="text" id="first_name" name="first_name" value="${first_name}"><br>
             <label for="last_name" >Last name:</label><br>
-            <input type="text" class="form-control" id="last_name" name="last_name" value="${last_name}"><br>
+            <input type="text" id="last_name" name="last_name" value="${last_name}"><br>
             <label for="date" >Birth Date:</label><br>
-            <input type="date" class="form-control" id="date" name="date" value="${date}"><br>
-            <input type="submit" class="btn btn-primary" value="Save">
+            <input type="date" id="date" name="date" value="${date}"><br>
+            <input type="submit" class="btn btn-warning" value="Save">
             <% if(request.getAttribute("error_date") != null && (Boolean)request.getAttribute("error_date")) { %>
             <p> Date is incorrect </p>
             <% } %>

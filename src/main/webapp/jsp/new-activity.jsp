@@ -37,7 +37,7 @@
                 }
             %>
         </select>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-warning" value="Submit">
         <% if(request.getAttribute("error_date_begin") != null && (Boolean)request.getAttribute("error_date_begin")) { %>
         <p> The starting date cannot be before the current date </p>
         <% } %>

@@ -23,7 +23,7 @@
     <p class="form-group">
         <label for="username" >Username:</label><br>
         <input type="text" id="username" name="username"><br><br>
-        <button type="submit" class="btn btn-primary">Add friend</button>
+        <button type="submit" class="btn btn-warning">Add friend</button>
         <% if(request.getAttribute("error") != null ) {
         if((boolean)request.getAttribute("error")){%>
             <p>
@@ -36,7 +36,7 @@
         <% }} %>
 </form>
     <form action="friendsRequest" method="get">
-            <button type="submit" class="btn btn-primary">friend request</button>
+            <button type="submit" class="btn btn-warning">friend request</button>
     </form>
 <%for(int i = 0;i<10;i++){ %>
     <br>

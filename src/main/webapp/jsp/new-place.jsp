@@ -22,7 +22,7 @@
         <input type="text" class="form-control" id="adr" name="adr" value="${adr}"><br>
         <label for="name" >Name:</label><br>
         <input type="text" class="form-control" id="name" name="name" value="${name}"><br>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-warning" value="Submit">
         <% if(request.getAttribute("error_adr") != null && (Boolean)request.getAttribute("error_adr")) { %>
         <p> error_adr </p>
         <% } %>

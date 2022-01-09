@@ -33,7 +33,7 @@
         </div>
         <form action="edit-user" method="get">
             <input type="text" name="username" value="<%=u.getUsername()%>" hidden>
-            <button type="submit" class="btn btn-primary">Edit</button>
+            <button type="submit" class="btn btn-warning">Edit</button>
         </form>
         <form action="del-user" method="get">
             <input type="text" name="user" value="<%=u.getUsername()%>" hidden>

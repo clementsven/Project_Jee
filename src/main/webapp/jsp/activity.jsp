@@ -20,7 +20,7 @@
 
 <div class="list-group">
     <form action="new-activity" method="get">
-        <button type="submit" class="btn btn-primary">Create new activity</button>
+        <button type="submit" class="btn btn-warning">Create new activity</button>
     </form>
 
     <%

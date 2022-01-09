@@ -17,7 +17,7 @@
 <div style="text-align: center;">
 <h2>Places</h2>
 <form action="new-place" method="get">
-  <button type="submit" class="btn btn-primary">Create new place</button>
+  <button type="submit" class="btn btn-warning">Create new place</button>
 </form>
 
 <div class="list-group">
