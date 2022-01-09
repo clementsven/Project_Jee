@@ -14,6 +14,8 @@
 <body>
     <%@ include file="nav.jsp" %>
 
+    <h2>Sign in</h2>
+
     <img src="img/main.jpg" width="400px" height="400px" style = "float:right" alt="...">
     <img src="img/main.jpg" width="400px" height="400px" style = "float:left" alt="...">
     <div style="text-align: center;">
