@@ -14,20 +14,22 @@
 <body>
     <%@ include file="nav.jsp" %>
 
+    <img src="img/main.jpg" width="400px" height="400px" style = "float:left" alt="...">
+    <img src="img/main.jpg" width="400px" height="400px" style = "float:right" alt="...">
+        <div style="text-align: center;">
     <h2> Login </h2>
     <form action="login"  method="post">
-        <div class="form-group col-md-2">
             <label for="username" >Username:</label><br>
-            <input type="text" class="form-control" id="username" name="username" required><br>
+            <input type="text" id="username" name="username" required><br>
             <label for="password" >Password:</label><br>
-            <input type="password" class="form-control" id="password" name="password" required><br>
-        </div>
+            <input type="password" id="password" name="password" required><br>
         <input type="submit" class="btn btn-primary" value="Submit">
          <%
          if(request.getAttribute("check") != null && (boolean)request.getAttribute("check")){%>
                 <p>Error</p>
         <%}
         %>
+        </div>
     </form>
 </body>
 </html>

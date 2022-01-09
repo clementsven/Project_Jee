@@ -67,6 +67,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="friends">Friends</a>
                     </li>
+                    <li class="nav-item">
+                        <form action="users" method="">
+                        <button class="btn btn-outline-warning" type="submit">I HAVE COVID</button>
+                        </form>
+                    </li>
                     <%  } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="login">Log in</a>
@@ -75,16 +80,6 @@
                         <a class="nav-link disabled">Profil</a>
                     </li>
                     <%  } %>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Others
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">See contact covid zone</a></li>
-                            <li><a class="dropdown-item" href="#">See contact covid event</a></li>
-                            <li><a class="dropdown-item" href="#">Random covid victim</a></li>
-                        </ul>
-                    </li>
                 </ul>
                 <%
                     if (session.getAttribute("username") != null) {

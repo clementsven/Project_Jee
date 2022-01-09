@@ -14,39 +14,62 @@
 <body>
 <%@ include file="nav.jsp" %>
 
+<img src="img/main.jpg" width="400px" height="400px" style = "float:right" alt="...">
+<img src="img/main.jpg" width="400px" height="400px" style = "float:left" alt="...">
+<div style="text-align: center;">
 <h2>Friends</h2>
-
 <form action="friends" method="post">
     <h3>Add a friend</h3>
-    <div class="form-group">
+    <p class="form-group">
         <label for="username" >Username:</label><br>
-        <input type="text" class="form-control" id="username" name="username"><br>
+        <input type="text" id="username" name="username"><br><br>
         <button type="submit" class="btn btn-primary">Add friend</button>
-    </div>
+        <% if(request.getAttribute("error") != null ) {
+        if((boolean)request.getAttribute("error")){%>
+            <p>
+                Don't exist man
+            </p>
+        <% } else { %>
+            <p>
+                Send like papa in mama
+            </p>
+        <% }} %>
 </form>
+    <form action="friendsRequest" method="get">
+            <button type="submit" class="btn btn-primary">friend request</button>
+    </form>
+<%for(int i = 0;i<10;i++){ %>
+    <br>
+    <% } %>
+
 
 <h3>Friends list</h3>
+</div>
 <div class="list-group">
     <%
         String user = (String) session.getAttribute("username");
         User currentUser = new User(null, null, user, null, null, null, false);
         currentUser.getOtherData();
-        ArrayList<User> friends = currentUser.getAllFriends();
+        ArrayList<User> friends = (ArrayList<User>) currentUser.getAllFriend();
         if (friends.isEmpty())  {%>
     <p>The list is empty</p>
     <%} else {
             for (User u: friends) {
     %>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start list-group-item-warning">
+
             <h5 class="mb-1">Friend <%=u.getUsername()%></h5>
-        </div>
-        <p class="mb-1"><%=u.getFirstName()%> <%=u.getLastName()%></p>
+            <p class="mb-1" ><%=u.getFirstName()%> <%=u.getLastName()%></p>
+
+        <form action="deleteFriends" method="post">
+            <input type="hidden" name="userToDelete" value="<%=u.getUsername()%>"/>
+            <button class="btn btn-outline-secondary" type="submit" >Delete</button>
+        </form>
+
+        <%
+            }}
+        %>
     </a>
-    <%
-            }
-        }
-    %>
-</div>
+   </div>
 </body>
 </html>

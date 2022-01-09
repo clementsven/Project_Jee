@@ -3,6 +3,7 @@ package project.jee.projectjeecovid.database;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
+import java.util.List;
 import java.util.ArrayList;
 
 public class User implements Model {
@@ -36,7 +37,7 @@ public class User implements Model {
 
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM users");
             ResultSet result = statement.executeQuery();
-            while (result.next()){
+            while (result.next()) {
                 String firstname = result.getString("first_name");
                 String lastname = result.getString("last_name");
                 String username = result.getString("username");
@@ -54,10 +55,6 @@ public class User implements Model {
             e.printStackTrace();
         }
         return users;
-    }
-
-    public ArrayList<User> getAllFriends() {
-        return new ArrayList<>();
     }
 
     @Override
@@ -88,9 +85,9 @@ public class User implements Model {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
             statement.setString(1, username);
             ResultSet result = statement.executeQuery();
-            if(result.next()){
+            if (result.next()) {
                 String tmp_hash = result.getString("pass_hash");
-                boolean tmp= BCrypt.checkpw(lastName,tmp_hash);
+                boolean tmp = BCrypt.checkpw(lastName, tmp_hash);
                 statement.close();
                 result.close();
                 return tmp;
@@ -164,19 +161,19 @@ public class User implements Model {
 
     public void getOtherData() {
         try {
-        Connection conn = connect();
+            Connection conn = connect();
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
-        statement.setString(1, username);
-        ResultSet result = statement.executeQuery();
-        if (result.next()) {
-            firstName = result.getString("first_name");
-            lastName = result.getString("last_name");
-            date = result.getDate("birth_date");
-            passHash = result.getString("pass_hash");
-            admin = result.getBoolean("admin");
-            profilPicture = result.getString("profil_picture");
-        }
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                firstName = result.getString("first_name");
+                lastName = result.getString("last_name");
+                date = result.getDate("birth_date");
+                passHash = result.getString("pass_hash");
+                admin = result.getBoolean("admin");
+                profilPicture = result.getString("profil_picture");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -194,16 +191,72 @@ public class User implements Model {
         }
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
-/*
-    void List<String> getAllFriend(){
-        ArrayList<String> rendu;
-
+    public List<User> getAllHalfFriend() {
+        List<User> listUser = new ArrayList<>();
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM friends WHERE (user_1 like ? or user_2 like ? ) and status = 123");
+            statement.setString(1, username);
+            statement.setString(2, username);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                String tmp = result.getString("user_2");
+                if (username.equalsIgnoreCase(tmp))
+                    listUser.add(this.getUser(result.getString("user_1")));
+                else
+                    listUser.add(this.getUser(result.getString("user_2")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listUser;
     }
 
-*/
+    public List<User> getAllFriend() {
+        List<User> listUser = new ArrayList<>();
+        try {
+            Connection conn = connect();
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM friends WHERE (user_1 like ? or user_2 like ? ) and status = 667");
+            statement.setString(1, username);
+            statement.setString(2, username);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                String tmp = result.getString("user_1");
+
+                if (username.equalsIgnoreCase(tmp))
+                    listUser.add(this.getUser(result.getString("user_2")));
+                else
+                    listUser.add(this.getUser(result.getString("user_1")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listUser;
+    }
+
+    public User getUser(String username) {
+        User u = null;
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                u = new User(null, null, username, null, null, null, false);
+                u.getOtherData();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+
     public String getFirstName() {
         return firstName;
     }
+
 
     public String getLastName() {
         return lastName;
@@ -213,13 +266,13 @@ public class User implements Model {
         return username;
     }
 
-    public String getPassHash() {
-        return passHash;
-    }
+//    public String getPassHash() {
+//        return passHash;
+//    }
 
-    public String getProfilPicture() {
-        return profilPicture;
-    }
+//    public String getProfilPicture() {
+//        return profilPicture;
+//    }
 
     public Date getDate() {
         return date;
@@ -241,13 +294,13 @@ public class User implements Model {
         this.username = username;
     }
 
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
-    }
+//    public void setPassHash(String passHash) {
+//        this.passHash = passHash;
+//    }
 
-    public void setProfilPicture(String profilPicture) {
-        this.profilPicture = profilPicture;
-    }
+//    public void setProfilPicture(String profilPicture) {
+//        this.profilPicture = profilPicture;
+//    }
 
     public void setDate(Date date) {
         this.date = date;
@@ -261,7 +314,7 @@ public class User implements Model {
         }
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
+//    public void setAdmin(Boolean admin) {
+//        this.admin = admin;
+//    }
 }

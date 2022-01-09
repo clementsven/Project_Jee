@@ -3,6 +3,7 @@ package project.jee.projectjeecovid.database;
 import java.sql.*;
 import java.util.ArrayList;
 
+@SuppressWarnings("ALL")
 public class Notif implements Model {
 
     private int id;
@@ -41,7 +42,6 @@ public class Notif implements Model {
         }
         return notifs;
     }
-
     @Override
     public void save() {
         try {

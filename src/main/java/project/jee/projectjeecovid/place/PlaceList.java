@@ -18,4 +18,5 @@ public class PlaceList extends HttpServlet {
 
         this.getServletContext().getRequestDispatcher("/jsp/places.jsp").forward(req, resp);
     }
+
 }
