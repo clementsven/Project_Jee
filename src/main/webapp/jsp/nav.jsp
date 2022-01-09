@@ -67,11 +67,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="friends">Friends</a>
                     </li>
+                    <%if (session.getAttribute("covid") != null && (boolean)session.getAttribute("covid")) {%>
                     <li class="nav-item">
-                        <form action="users" method="">
-                        <button class="btn btn-outline-warning" type="submit">I HAVE COVID</button>
+                        <form action="/" method="post">
+                            <button class="btn btn-outline-warning disabled" type="button">I HAVE COVID</button>
                         </form>
                     </li>
+                    <%} else {%>
+                    <li class="nav-item">
+                        <form action="notif-covid" method="post">
+                            <button class="btn btn-outline-warning" type="submit">I HAVE COVID</button>
+                        </form>
+                    </li>
+                    <%}%>
                     <%  } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="login">Log in</a>

@@ -19,6 +19,32 @@ public class Activity implements Model{
         this.name = name;
     }
 
+    public static ArrayList<Activity> getAllActivities() {
+        ArrayList<Activity> activities = new ArrayList<>();
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM activity");
+            statement.executeQuery();
+
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Date date_begin = resultSet.getDate("date_begin");
+                Date date_end = resultSet.getDate("date_end");
+                String name = resultSet.getString("name");
+                String user = resultSet.getString("creator");
+                Activity a = new Activity(id, user, date_begin, date_end, name);
+                activities.add(a);
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activities;
+    }
+
     public static ArrayList<Activity> getAllUserActivities(String user) {
         ArrayList<Activity> activities = new ArrayList<>();
         try {

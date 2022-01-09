@@ -12,6 +12,30 @@ public class ActivityPlace implements Model{
         this.idPlace = idPlace;
     }
 
+    public static Place getPlace(int id) {
+        Place p = null;
+        try {
+            Connection conn = connect();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM place INNER JOIN activity_place ON activity_place.id_place=place.id WHERE activity_place.id_activity = ?");
+            statement.setInt(1, id);
+            statement.executeQuery();
+
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String adr = resultSet.getString("adress");
+                int idPlace = resultSet.getInt("id");
+                p = new Place(idPlace, name, adr);
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
+
     public static String getPlaceName(int id) {
         String name = "NULL";
         try {
