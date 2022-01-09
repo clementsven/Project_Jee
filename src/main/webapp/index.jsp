@@ -65,7 +65,11 @@
                     <div class="carousel-caption text-end">
                         <h1> Create Event</h1>
                         <p> Tired of being alone? Join many events dedicated to members.</p>
-                        <p><a class="btn btn-lg btn-secondary" href="#">See event</a></p>
+                        <% if (session.getAttribute("username") != null) {%>
+                        <p><a class="btn btn-lg btn-secondary" href="/activity">See event</a></p>
+                        <%} else {%>
+                        <p><a class="btn btn-lg btn-secondary" href="/login">See event</a></p>
+                        <%}%>
                     </div>
                 </div>
             </div>
@@ -75,7 +79,11 @@
                     <div class="carousel-caption">
                         <h1>Help your town!</h1>
                         <p> Mark the risky places in your city to fight clusters</p>
-                        <p><a class="btn btn-lg btn-secondary" href="#">See risky zone</a></p>
+                        <% if (session.getAttribute("username") != null) {%>
+                        <p><a class="btn btn-lg btn-secondary" href="/places">See risky zone</a></p>
+                        <%} else {%>
+                        <p><a class="btn btn-lg btn-secondary" href="/login">See risky zone</a></p>
+                        <%}%>
                     </div>
                 </div>
             </div>
