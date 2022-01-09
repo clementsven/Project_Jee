@@ -14,12 +14,12 @@
 <body>
     <%@ include file="nav.jsp" %>
 
-    <h2>Sign in</h2>
-
     <img src="img/main.jpg" width="400px" height="400px" style = "float:right" alt="...">
     <img src="img/main.jpg" width="400px" height="400px" style = "float:left" alt="...">
     <div style="text-align: center;">
-    <form action="sign-in"  method="post">
+        <h2>Sign in</h2>
+
+        <form action="sign-in"  method="post">
         <label for="username" >Username:</label><br>
         <input type="text" id="username" name="username" value="${username}" required><br>
         <label for="password" >Password:</label><br>
